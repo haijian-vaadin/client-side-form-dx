@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.example.application.backend.BackendService;
 import com.example.application.backend.Employee;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.server.connect.Endpoint;
 import com.vaadin.flow.server.connect.auth.AnonymousAllowed;
 import com.vaadin.flow.server.connect.exception.EndpointException;
@@ -33,8 +34,8 @@ public class MasterDetailEndpoint {
         return new EmployeesData(employees, totalSize);
     }
 
-    public void saveEmployee(Employee employee) throws EndpointException {
-        throw new EndpointException("not implemented");
+    public void saveEmployee(Employee employee){
+        service.saveEmployee(employee);
     }
 
     public static class EmployeesData {

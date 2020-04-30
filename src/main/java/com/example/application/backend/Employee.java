@@ -3,6 +3,7 @@ package com.example.application.backend;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Employee {
+    private static long id_tracker = 42L; 
 
     @JsonIgnore
     private Long id;
@@ -14,9 +15,9 @@ public class Employee {
     private String email;
     private String notes = "";
 
-    public Employee(Long id, String firstname, String lastname, String email, String title) {
+    public Employee(String firstname, String lastname, String email, String title) {
         super();
-        this.id = id;
+        this.id = id_tracker++;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -91,7 +92,11 @@ public class Employee {
     }
 
     public void setIdString(String idString) {
-        // no-op
+        try{
+            this.id = Long.parseLong(idString);
+        }catch(Exception e){
+            this.id = Employee.id_tracker++;
+        }
     }
 
     @Override

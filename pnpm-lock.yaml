@@ -3,7 +3,7 @@ dependencies:
   '@polymer/iron-list': 3.0.2
   '@polymer/polymer': 3.2.0
   '@vaadin/flow-frontend': 'link:target/flow-frontend'
-  '@vaadin/router': 1.7.1
+  '@vaadin/router': 1.7.2
   '@vaadin/vaadin-accordion': 1.1.0-alpha1
   '@vaadin/vaadin-app-layout': 2.1.0-alpha1
   '@vaadin/vaadin-board': 2.1.1
@@ -157,13 +157,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-GKF2VnEkMmEeEGvoo03ocrP9ySMuX1ypKazIYMlsjfslfBMhOAtC5dmEWKdJioW4lJN7MZRS88kalTsVClyQ9w==
-  /@vaadin/router/1.7.1:
+  /@vaadin/router/1.7.2:
     dependencies:
       '@vaadin/vaadin-usage-statistics': 2.1.0
       path-to-regexp: 2.4.0
     dev: false
     resolution:
-      integrity: sha512-tJK0yGy3/q4wCRhaDwuB6t5EyoTxFULNegQhSVxjCkygtVSUWT9YjgLGpWqwSr6XzXCd+lk/EpkpKbtEN6KHRQ==
+      integrity: sha512-Jcfd85W46k/kq1/1DtQEz7J3poZ+5gArfOYUMbNvPTpiYSvI7egXTIolkU0dvkpxWuSSAIj1RTIbzIqyIfPepA==
   /@vaadin/vaadin-accordion/1.1.0-alpha1:
     dependencies:
       '@polymer/polymer': 3.2.0
@@ -5381,7 +5381,7 @@ specifiers:
   '@polymer/polymer': 3.2.0
   '@types/validator': 10.11.3
   '@vaadin/flow-frontend': ./target/flow-frontend
-  '@vaadin/router': 1.7.1
+  '@vaadin/router': 1.7.2
   '@vaadin/vaadin-accordion': 1.1.0-alpha1
   '@vaadin/vaadin-app-layout': 2.1.0-alpha1
   '@vaadin/vaadin-board': 2.1.1

@@ -18,15 +18,15 @@ import * as viewEndpoint from '../../generated/MasterDetailEndpoint';
 // import types used in the endpoint
 import Employee from '../../generated/com/example/application/backend/Employee';
 
-import { EndpointError } from '@vaadin/flow-frontend/Connect';
-
 // utilities to import style modules
 import { CSSModule } from '../../css-utils';
 
 // @ts-ignore
-import {EmployeeModel} from '../../generated/com/example/application/backend/EmployeeModel';
+import EmployeeModel, {EmployeeModel} from '../../generated/com/example/application/backend/EmployeeModel';
 // @ts-ignore
 import {EmployeeDataModel} from '../../generated/com/example/application/views/masterdetail/MasterDetailEndpoint/EmployeesDataModel';
+
+import {Binder, field} from '@vaadin/flow-frontend/Binder';
 
 import styles from './master-detail-view.css';
 
@@ -42,11 +42,7 @@ export class MasterDetailViewElement extends LitElement {
   @query('#notification')
   private notification: any;
 
-  @query('#firstName') private firstName: any;
-  @query('#lastName') private lastName: any;
-  @query('#email') private email: any;
-  @query('#password') private password: any;
-  private employeeId: any;
+  private binder = new Binder(this, EmployeeModel, ()=>this.requestUpdate());
 
   render() {
     return html`
@@ -74,24 +70,26 @@ export class MasterDetailViewElement extends LitElement {
           <vaadin-form-layout>
             <vaadin-form-item>
               <label slot="label">First name</label>
-              <vaadin-text-field class="full-width" id="firstName"></vaadin-text-field>
+              <vaadin-text-field 
+              ...="${field(this.binder.model.firstname)}"
+              class="full-width" id="firstName"></vaadin-text-field>
             </vaadin-form-item>
             <vaadin-form-item>
               <label slot="label">Last name</label>
-              <vaadin-text-field class="full-width" id="lastName"></vaadin-text-field>
+              <vaadin-text-field 
+              ...="${field(this.binder.model.lastname)}"
+              class="full-width" id="lastName"></vaadin-text-field>
             </vaadin-form-item>
             <vaadin-form-item>
               <label slot="label">Email</label>
-              <vaadin-text-field class="full-width" id="email"></vaadin-text-field>
-            </vaadin-form-item>
-            <vaadin-form-item>
-              <label slot="label">Password</label>
-              <vaadin-password-field class="full-width" id="password"></vaadin-password-field>
+              <vaadin-text-field 
+              ...="${field(this.binder.model.email)}"
+              class="full-width" id="email"></vaadin-text-field>
             </vaadin-form-item>
           </vaadin-form-layout>
           <vaadin-horizontal-layout id="button-layout" theme="spacing">
-            <vaadin-button theme="tertiary" slot="" @click="${this.clearForm}">
-              Cancel
+            <vaadin-button theme="tertiary" slot="" @click="${this.resetForm}">
+              Reset
             </vaadin-button>
             <vaadin-button theme="primary" @click="${this.save}">
               Save
@@ -114,51 +112,28 @@ export class MasterDetailViewElement extends LitElement {
       callback(employeesData.employees, employeesData.totalSize);
     };
 
-    this.grid.addEventListener('active-item-changed', function (this: any, event: any) {
+    this.grid.addEventListener('active-item-changed', (event: any)=>{
       const item = event.detail.value;
-      this.selectedItems = item ? [item] : [];
-      const customView = this.domHost;
+      this.grid.selectedItems = item ? [item] : [];
+      const customView = this.grid.domHost;
 
       if (item) {
-        customView.firstName.value = item.firstname;
-        customView.lastName.value = item.lastname;
-        customView.email.value = item.email;
-        customView.password.value = '----';
-        customView.employeeId = item.idString;
+        this.binder.reset(item);
       } else {
-        customView.clearForm();
+        customView.resetForm();
       }
     });
   }
 
   private async save() {
-    const employee: Employee = {
-      idString: this.employeeId,
-      email: this.email.value,
-      firstname: this.firstName.value,
-      lastname: this.lastName.value,
-      notes: '',
-      title: '',
-    };
-    try {
-      await viewEndpoint.saveEmployee(employee);
-    } catch (error) {
-      if (error instanceof EndpointError) {
-        this.notification.renderer = (root: Element) => (root.textContent = `Server error. ${error.message}`);
-        this.notification.open();
-      } else {
-        throw error;
-      }
-    }
+    await this.binder.submitTo(viewEndpoint.saveEmployee);
+    this.notification.renderer = (root: Element) => (root.textContent = `Data saved!`);
+    this.notification.open();
+    this.grid.clearCache();
   }
 
-  private clearForm() {
-    this.grid.selectedItems = [];
-    this.firstName.value = '';
-    this.lastName.value = '';
-    this.email.value = '';
-    this.password.value = '';
-    this.employeeId = '';
+  private resetForm() {
+    this.binder.reset();
   }
 
   private firstNameRenderer(root: Element, _: any, rowData: { item: Employee }) {
