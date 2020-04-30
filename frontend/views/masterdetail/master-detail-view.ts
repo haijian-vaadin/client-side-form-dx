@@ -26,8 +26,6 @@ import EmployeeModel, {EmployeeModel} from '../../generated/com/example/applicat
 // @ts-ignore
 import {EmployeeDataModel} from '../../generated/com/example/application/views/masterdetail/MasterDetailEndpoint/EmployeesDataModel';
 
-import {Binder, field} from '@vaadin/flow-frontend/Binder';
-
 import styles from './master-detail-view.css';
 
 @customElement('master-detail-view')
@@ -40,9 +38,8 @@ export class MasterDetailViewElement extends LitElement {
   private grid: any;
 
   @query('#notification')
+  // @ts-ignore
   private notification: any;
-
-  private binder = new Binder(this, EmployeeModel, ()=>this.requestUpdate());
 
   render() {
     return html`
@@ -70,28 +67,22 @@ export class MasterDetailViewElement extends LitElement {
           <vaadin-form-layout>
             <vaadin-form-item>
               <label slot="label">First name</label>
-              <vaadin-text-field 
-              ...="${field(this.binder.model.firstname)}"
-              class="full-width" id="firstName"></vaadin-text-field>
+              <vaadin-text-field class="full-width" id="firstName"></vaadin-text-field>
             </vaadin-form-item>
             <vaadin-form-item>
               <label slot="label">Last name</label>
-              <vaadin-text-field 
-              ...="${field(this.binder.model.lastname)}"
-              class="full-width" id="lastName"></vaadin-text-field>
+              <vaadin-text-field class="full-width" id="lastName"></vaadin-text-field>
             </vaadin-form-item>
             <vaadin-form-item>
               <label slot="label">Email</label>
-              <vaadin-text-field 
-              ...="${field(this.binder.model.email)}"
-              class="full-width" id="email"></vaadin-text-field>
+              <vaadin-text-field class="full-width" id="email"></vaadin-text-field>
             </vaadin-form-item>
           </vaadin-form-layout>
           <vaadin-horizontal-layout id="button-layout" theme="spacing">
-            <vaadin-button theme="tertiary" slot="" @click="${this.resetForm}">
+            <vaadin-button theme="tertiary" slot="">
               Reset
             </vaadin-button>
-            <vaadin-button theme="primary" @click="${this.save}">
+            <vaadin-button theme="primary">
               Save
             </vaadin-button>
           </vaadin-horizontal-layout>
@@ -115,25 +106,15 @@ export class MasterDetailViewElement extends LitElement {
     this.grid.addEventListener('active-item-changed', (event: any)=>{
       const item = event.detail.value;
       this.grid.selectedItems = item ? [item] : [];
-      const customView = this.grid.domHost;
 
       if (item) {
-        this.binder.reset(item);
+        //TODO: set the item to binder
+        
       } else {
-        customView.resetForm();
+        //TODO: set an empty value to binder
+        
       }
     });
-  }
-
-  private async save() {
-    await this.binder.submitTo(viewEndpoint.saveEmployee);
-    this.notification.renderer = (root: Element) => (root.textContent = `Data saved!`);
-    this.notification.open();
-    this.grid.clearCache();
-  }
-
-  private resetForm() {
-    this.binder.reset();
   }
 
   private firstNameRenderer(root: Element, _: any, rowData: { item: Employee }) {
