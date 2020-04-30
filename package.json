@@ -59,9 +59,12 @@
       "html-webpack-plugin": "3.2.0",
       "typescript": "3.8.3",
       "webpack-merge": "4.2.2",
-      "webpack-dev-server": "3.10.3"
+      "webpack-dev-server": "3.10.3",
+      "validator": "12.0.0",
+      "lit-html": "1.2.1",
+      "@types/validator": "10.11.3"
     },
-    "hash": "6b311d63fd87469b2cbd2903f011c53b7bf959074b3ce24b0c5ab6b68a8ede37"
+    "hash": "e851e11e2553d091779595d8a6a81b919594c75b1f4e6ae73293720f8d277842"
   },
   "dependencies": {
     "@vaadin/router": "^1.6.0",
@@ -121,6 +124,9 @@
     "html-webpack-plugin": "3.2.0",
     "typescript": "3.8.3",
     "webpack-merge": "4.2.2",
-    "webpack-dev-server": "3.10.3"
+    "webpack-dev-server": "3.10.3",
+    "validator": "12.0.0",
+    "lit-html": "1.2.1",
+    "@types/validator": "10.11.3"
   }
 }

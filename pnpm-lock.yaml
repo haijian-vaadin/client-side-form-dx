@@ -42,16 +42,19 @@ dependencies:
   '@vaadin/vaadin-time-picker': 2.1.0-alpha2
   '@vaadin/vaadin-upload': 4.3.0-alpha1
 devDependencies:
+  '@types/validator': 10.11.3
   awesome-typescript-loader: 5.2.1_typescript@3.8.3
   compression-webpack-plugin: 3.1.0_webpack@4.42.0
   copy-webpack-plugin: 5.1.1_webpack@4.42.0
   html-webpack-plugin: 3.2.0_webpack@4.42.0
   lit-element: 2.3.1
+  lit-html: 1.2.1
   progress-webpack-plugin: 0.0.24
   raw-loader: 4.0.0_webpack@4.42.0
   script-ext-html-webpack-plugin: 2.1.4_f9f57bd8a148b6edc3192202e3fa66cb
   terser: 4.6.7
   typescript: 3.8.3
+  validator: 12.0.0
   webpack: 4.42.0_webpack@4.42.0
   webpack-cli: 3.3.11_webpack@4.42.0
   webpack-dev-server: 3.10.3_a99e8271b7943dfdc7dfc6c27536d940
@@ -150,6 +153,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-x26ur3dSXgv5AwKS0lNfbjpCakGIduWU1DU91Zz58ONRWrIKGunmZBNv4P7N+e27sJkiGDsw/3fT4AtsqQBrBA==
+  /@types/validator/10.11.3:
+    dev: true
+    resolution:
+      integrity: sha512-GKF2VnEkMmEeEGvoo03ocrP9ySMuX1ypKazIYMlsjfslfBMhOAtC5dmEWKdJioW4lJN7MZRS88kalTsVClyQ9w==
   /@vaadin/router/1.7.1:
     dependencies:
       '@vaadin/vaadin-usage-statistics': 2.1.0
@@ -5050,6 +5057,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-CNmdbwQMBjwr9Gsmohvm0pbL954tJrNzf6gWL3K+QMQf00PF7ERGrEiLgjuU3mKreLC2MeGhUsNV9ybTbLgd3w==
+  /validator/12.0.0:
+    dev: true
+    engines:
+      node: '>= 0.10'
+    resolution:
+      integrity: sha512-r5zA1cQBEOgYlesRmSEwc9LkbfNLTtji+vWyaHzRZUxCTHdsX3bd+sdHfs5tGZ2W6ILGGsxWxCNwT/h3IY/3ng==
   /vary/1.1.2:
     dev: true
     engines:
@@ -5366,6 +5379,7 @@ specifiers:
   '@polymer/iron-icon': 3.0.1
   '@polymer/iron-list': 3.0.2
   '@polymer/polymer': 3.2.0
+  '@types/validator': 10.11.3
   '@vaadin/flow-frontend': ./target/flow-frontend
   '@vaadin/router': 1.7.1
   '@vaadin/vaadin-accordion': 1.1.0-alpha1
@@ -5410,11 +5424,13 @@ specifiers:
   copy-webpack-plugin: 5.1.1
   html-webpack-plugin: 3.2.0
   lit-element: 2.3.1
+  lit-html: 1.2.1
   progress-webpack-plugin: 0.0.24
   raw-loader: 4.0.0
   script-ext-html-webpack-plugin: 2.1.4
   terser: 4.6.7
   typescript: 3.8.3
+  validator: 12.0.0
   webpack: 4.42.0
   webpack-cli: 3.3.11
   webpack-dev-server: 3.10.3

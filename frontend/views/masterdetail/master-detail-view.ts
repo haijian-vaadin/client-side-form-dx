@@ -23,6 +23,11 @@ import { EndpointError } from '@vaadin/flow-frontend/Connect';
 // utilities to import style modules
 import { CSSModule } from '../../css-utils';
 
+// @ts-ignore
+import {EmployeeModel} from '../../generated/com/example/application/backend/EmployeeModel';
+// @ts-ignore
+import {EmployeeDataModel} from '../../generated/com/example/application/views/masterdetail/MasterDetailEndpoint/EmployeesDataModel';
+
 import styles from './master-detail-view.css';
 
 @customElement('master-detail-view')
