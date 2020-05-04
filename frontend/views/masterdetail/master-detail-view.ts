@@ -115,12 +115,11 @@ export class MasterDetailViewElement extends LitElement {
     this.grid.addEventListener('active-item-changed', (event: any)=>{
       const item = event.detail.value;
       this.grid.selectedItems = item ? [item] : [];
-      const customView = this.grid.domHost;
 
       if (item) {
         this.binder.reset(item);
       } else {
-        customView.resetForm();
+        this.binder.reset(EmployeeModel.createEmptyValue());
       }
     });
   }
