@@ -22,8 +22,6 @@ import Employee from '../../generated/com/example/application/backend/Employee';
 import { CSSModule } from '../../css-utils';
 
 // @ts-ignore
-import EmployeeModel, {EmployeeModel} from '../../generated/com/example/application/backend/EmployeeModel';
-// @ts-ignore
 import {EmployeeDataModel} from '../../generated/com/example/application/views/masterdetail/MasterDetailEndpoint/EmployeesDataModel';
 
 import styles from './master-detail-view.css';
