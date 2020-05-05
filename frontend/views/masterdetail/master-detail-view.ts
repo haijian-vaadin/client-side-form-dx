@@ -11,6 +11,8 @@ import '@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout';
 import '@vaadin/vaadin-split-layout/vaadin-split-layout';
 import '@vaadin/vaadin-text-field/vaadin-password-field';
 import '@vaadin/vaadin-text-field/vaadin-text-field';
+import '@vaadin/vaadin-text-field/vaadin-number-field';
+import '@vaadin/vaadin-text-field/vaadin-email-field';
 
 // import the remote endpoint
 import * as viewEndpoint from '../../generated/MasterDetailEndpoint';
@@ -82,9 +84,15 @@ export class MasterDetailViewElement extends LitElement {
             </vaadin-form-item>
             <vaadin-form-item>
               <label slot="label">Email</label>
-              <vaadin-text-field 
+              <vaadin-email-field 
               ...="${field(this.binder.model.email)}"
-              class="full-width" id="email"></vaadin-text-field>
+              class="full-width" id="email"></vaadin-email-field>
+            </vaadin-form-item>
+            <vaadin-form-item>
+              <label slot="age">Age</label>
+              <vaadin-number-field 
+              ...="${field(this.binder.model.age)}"
+              class="full-width" id="age"></vaadin-number-field>
             </vaadin-form-item>
           </vaadin-form-layout>
           <vaadin-horizontal-layout id="button-layout" theme="spacing">

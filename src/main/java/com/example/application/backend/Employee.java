@@ -14,6 +14,7 @@ public class Employee {
     private String title;
     private String email;
     private String notes = "";
+    private int age = 25;
 
     public Employee(String firstname, String lastname, String email, String title) {
         super();
@@ -99,6 +100,8 @@ public class Employee {
         }
     }
 
+    
+
     @Override
     public int hashCode() {
         if (id == null) {
@@ -121,5 +124,13 @@ public class Employee {
             return true;
         }
         return false;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
