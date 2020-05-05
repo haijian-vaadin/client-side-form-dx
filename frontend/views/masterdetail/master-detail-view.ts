@@ -62,6 +62,7 @@ export class MasterDetailViewElement extends LitElement {
           </vaadin-grid>
         </div>
         <div id="editor-layout">
+          <!-- TODO: add bindngs to the fields in this form-->
           <vaadin-form-layout>
             <vaadin-form-item>
               <label slot="label">First name</label>
@@ -77,10 +78,10 @@ export class MasterDetailViewElement extends LitElement {
             </vaadin-form-item>
           </vaadin-form-layout>
           <vaadin-horizontal-layout id="button-layout" theme="spacing">
-            <vaadin-button theme="tertiary" slot="">
+            <vaadin-button theme="tertiary" slot="" @click="${this.reset}">
               Reset
             </vaadin-button>
-            <vaadin-button theme="primary">
+            <vaadin-button theme="primary" @click="${this.save}">
               Save
             </vaadin-button>
           </vaadin-horizontal-layout>
@@ -102,10 +103,10 @@ export class MasterDetailViewElement extends LitElement {
     };
 
     this.grid.addEventListener('active-item-changed', (event: any)=>{
-      const item = event.detail.value;
-      this.grid.selectedItems = item ? [item] : [];
+      const employee = event.detail.value;
+      this.grid.selectedItems = employee ? [employee] : [];
 
-      if (item) {
+      if (employee) {
         //TODO: set the item to binder
         
       } else {
@@ -125,5 +126,15 @@ export class MasterDetailViewElement extends LitElement {
 
   private emailRenderer(root: Element, _: any, rowData: { item: Employee }) {
     render(html` <span>${rowData.item.email}</span> `, root);
+  }
+
+  //TODO: implement the save function
+  private save(){
+    console.log("save");
+  }
+
+  //TODO: implement the reset function
+  private reset(){
+    console.log("reset");
   }
 }
