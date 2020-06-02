@@ -28,7 +28,7 @@ import EmployeeModel from '../../generated/com/example/application/backend/Emplo
 // @ts-ignore
 import {EmployeeDataModel} from '../../generated/com/example/application/views/masterdetail/MasterDetailEndpoint/EmployeesDataModel';
 
-import {Binder, field} from '@vaadin/flow-frontend/Binder';
+import {Binder, field} from '@vaadin/form';
 
 import styles from './master-detail-view.css';
 
@@ -44,7 +44,7 @@ export class MasterDetailViewElement extends LitElement {
   @query('#notification')
   private notification: any;
 
-  private binder = new Binder(this, EmployeeModel, ()=>this.requestUpdate());
+  private binder = new Binder(this, EmployeeModel);
 
   render() {
     return html`
@@ -70,30 +70,12 @@ export class MasterDetailViewElement extends LitElement {
         </div>
         <div id="editor-layout">
           <vaadin-form-layout>
-            <vaadin-form-item>
-              <label slot="label">First name</label>
-              <vaadin-text-field 
-              ...="${field(this.binder.model.firstname)}"
-              class="full-width" id="firstName"></vaadin-text-field>
-            </vaadin-form-item>
-            <vaadin-form-item>
-              <label slot="label">Last name</label>
-              <vaadin-text-field 
-              ...="${field(this.binder.model.lastname)}"
-              class="full-width" id="lastName"></vaadin-text-field>
-            </vaadin-form-item>
-            <vaadin-form-item>
-              <label slot="label">Email</label>
-              <vaadin-email-field 
-              ...="${field(this.binder.model.email)}"
-              class="full-width" id="email"></vaadin-email-field>
-            </vaadin-form-item>
-            <vaadin-form-item>
-              <label slot="age">Age</label>
-              <vaadin-number-field 
-              ...="${field(this.binder.model.age)}"
-              class="full-width" id="age"></vaadin-number-field>
-            </vaadin-form-item>
+            <vaadin-text-field label="First name"
+            ...="${field(this.binder.model.firstname)}"></vaadin-text-field>
+            <vaadin-text-field label="Last name"
+            ...="${field(this.binder.model.lastname)}"></vaadin-text-field>
+            <vaadin-email-field label="Email"
+            ...="${field(this.binder.model.email)}"></vaadin-email-field>
           </vaadin-form-layout>
           <vaadin-horizontal-layout id="button-layout" theme="spacing">
             <vaadin-button theme="tertiary" slot="" @click="${this.resetForm}">
@@ -127,7 +109,7 @@ export class MasterDetailViewElement extends LitElement {
       if (item) {
         this.binder.reset(item);
       } else {
-        this.binder.reset(EmployeeModel.createEmptyValue());
+        this.binder.clear();
       }
     });
   }

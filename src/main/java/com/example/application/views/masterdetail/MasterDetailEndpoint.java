@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.example.application.backend.BackendService;
 import com.example.application.backend.Employee;
 import com.vaadin.flow.server.connect.Endpoint;
+import com.vaadin.flow.server.connect.auth.AnonymousAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * The endpoint for the client-side List View.
  */
 @Endpoint
+@AnonymousAllowed
 public class MasterDetailEndpoint {
 
     @Autowired
