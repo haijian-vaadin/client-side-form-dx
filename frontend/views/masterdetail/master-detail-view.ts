@@ -28,7 +28,7 @@ import EmployeeModel from '../../generated/com/example/application/backend/Emplo
 // @ts-ignore
 import {EmployeeDataModel} from '../../generated/com/example/application/views/masterdetail/MasterDetailEndpoint/EmployeesDataModel';
 
-import {Binder, field} from '@vaadin/form';
+import {Binder, field, NotEmpty, Size} from '@vaadin/form';
 
 import styles from './master-detail-view.css';
 
@@ -78,10 +78,10 @@ export class MasterDetailViewElement extends LitElement {
             ...="${field(this.binder.model.email)}"></vaadin-email-field>
           </vaadin-form-layout>
           <vaadin-horizontal-layout id="button-layout" theme="spacing">
-            <vaadin-button theme="tertiary" slot="" @click="${this.resetForm}">
+            <vaadin-button theme="tertiary" slot="" @click="${this.resetForm}" ?disabled="${!this.binder.dirty}">
               Reset
             </vaadin-button>
-            <vaadin-button theme="primary" @click="${this.save}">
+            <vaadin-button theme="primary" @click="${this.save}" ?disabled="${this.binder.invalid || this.binder.submitting}">
               Save
             </vaadin-button>
           </vaadin-horizontal-layout>
@@ -112,6 +112,27 @@ export class MasterDetailViewElement extends LitElement {
         this.binder.clear();
       }
     });
+
+    const firstname = this.binder.model.firstname;
+    const lastname = this.binder.model.lastname;
+    
+    this.binder.for(firstname).addValidator(new NotEmpty({message: 'First name cannot be empty'}));
+    this.binder.for(lastname).addValidator(new NotEmpty({message: 'Last name cannot be empty'}));
+    this.binder.for(this.binder.model.email).addValidator(new NotEmpty({message: 'Email cannot be empty'}));
+    this.binder.for(firstname).addValidator(new Size({max:10, message: 'First name should be less than 10 characters'}));
+    this.binder.for(lastname).addValidator(new Size({max:10, message: 'Last name should be less than 10 characters'}));
+
+    this.binder.for(firstname).addValidator({validate: (value:string) => !value.includes('Vaadin'), message: 'How dare you use the secret word!'});
+    
+    this.binder.addValidator({
+      validate(value: Employee) {
+        if (value.firstname === value.lastname) {
+          return { property: firstname, value, validator: this };
+        }
+        return;
+      },
+      message: 'First name and last name cannot be the same'
+    })
   }
 
   private async save() {

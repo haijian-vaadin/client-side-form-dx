@@ -1,5 +1,8 @@
 package com.example.application.backend;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Employee {
@@ -9,9 +12,15 @@ public class Employee {
     private Long id;
 
     private String idString;
+
+    //@NotEmpty
+    //@Size(max=10, message = "Name should be less than 10 charactors")
     private String firstname;
+    //@NotEmpty
+    //@Size(max=10, message = "Name should be less than 10 charactors")
     private String lastname;
     private String title;
+    //@NotEmpty
     private String email;
     private String notes = "";
     private int age = 25;
