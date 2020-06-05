@@ -13,7 +13,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <vaadin.version>17.0-SNAPSHOT</vaadin.version>
-        <flow.version>3.2.forms-SNAPSHOT</flow.version>
+        <flow.version>3.2.0.alpha6</flow.version>
     </properties>
 
     <parent>
