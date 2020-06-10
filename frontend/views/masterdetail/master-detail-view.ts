@@ -11,6 +11,7 @@ import '@vaadin/vaadin-ordered-layout/vaadin-horizontal-layout';
 import '@vaadin/vaadin-split-layout/vaadin-split-layout';
 import '@vaadin/vaadin-text-field/vaadin-password-field';
 import '@vaadin/vaadin-text-field/vaadin-text-field';
+import '@vaadin/vaadin-text-field/vaadin-email-field';
 
 // import the remote endpoint
 import * as viewEndpoint from '../../generated/MasterDetailEndpoint';
@@ -64,18 +65,9 @@ export class MasterDetailViewElement extends LitElement {
         <div id="editor-layout">
           <!-- TODO: add bindngs to the fields in this form-->
           <vaadin-form-layout>
-            <vaadin-form-item>
-              <label slot="label">First name</label>
-              <vaadin-text-field class="full-width" id="firstName"></vaadin-text-field>
-            </vaadin-form-item>
-            <vaadin-form-item>
-              <label slot="label">Last name</label>
-              <vaadin-text-field class="full-width" id="lastName"></vaadin-text-field>
-            </vaadin-form-item>
-            <vaadin-form-item>
-              <label slot="label">Email</label>
-              <vaadin-text-field class="full-width" id="email"></vaadin-text-field>
-            </vaadin-form-item>
+            <vaadin-text-field label="First name"></vaadin-text-field>
+            <vaadin-text-field label="Last name"></vaadin-text-field>
+            <vaadin-email-field label="Email"></vaadin-email-field>
           </vaadin-form-layout>
           <vaadin-horizontal-layout id="button-layout" theme="spacing">
             <vaadin-button theme="tertiary" slot="" @click="${this.reset}">
